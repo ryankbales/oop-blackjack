@@ -66,10 +66,10 @@ class Blackjack < Game
     @deck = deck
     puts "Hello #{self.player.name}!  Your dealer is #{self.dealer.name}"
   end
-
-  deal_two_cards_each(deck, player.hand, dealer.hand)
+  binding.pry
   player_hand = player.hand
   dealer_hand = dealer.hand
+  deal_two_cards_each(deck, player_hand, dealer_hand)
   binding.pry
   get_hand_value(player_hand)
   get_hand_value(dealer_hand)
