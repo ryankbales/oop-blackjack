@@ -11,17 +11,6 @@ module Dealable
   end
 end
 
-module ShuffleDeck
-  def intialize(deck)
-    deck.shuffle!
-  end
-end
-
-module Cuttable
-  def cut
-  end
-end
-
 module Valuable
   def get_hand_value(player, values=CARD_VALUES)
     player_card_values = []
@@ -49,5 +38,44 @@ module Valuable
 
   def bust?(hand_value)
     hand_value > 21 ? true : false
+  end
+end
+
+module Handable
+  def show_hand(hand)
+    hand.each do |card|
+      puts "#{card[0]} of #{card[1]}"
+    end
+  end
+
+  def show_one_card(hand)
+    face_up = hand.first
+    puts "#{face_up[0]} of #{face_up[1]}"
+  end
+
+  def check_hand(hand_value, result="")
+    if blackjack?(hand_value)
+      result = 'blackjack'
+    elsif bust?(hand_value)
+      result = 'bust'
+    else
+      result = false
+    end
+    return result
+  end
+end
+
+module HitStay
+  def hit_or_stay?
+    puts "(H)it or (S)tay?"
+    response = gets.chomp.downcase
+    if response == "h"
+      return true
+    elsif response == "s"
+      return false
+    else
+      puts "Please enter 'h' or 's'"
+      hit_or_stay?
+    end
   end
 end
